@@ -320,15 +320,15 @@ export abstract class CustomContent extends CustomBaseContent {
     static fromRawContent(rawContent: any, type: CustomType): CustomContent {
         let content: CustomContent;
 
-        switch(type) {
+        switch(type.toLowerCase()) {
 
-            case CustomType.CAROUSEL: content = new CustomCarouselContent(); break;
+            case CustomType.CAROUSEL.toLowerCase(): content = new CustomCarouselContent(); break;
 
-            case CustomType.LIST: content = new CustomListContent(); break;
+            case CustomType.LIST.toLowerCase(): content = new CustomListContent(); break;
 
-            case CustomType.COMMERCE: content = new CustomCommerceContent(); break;
+            case CustomType.COMMERCE.toLowerCase(): content = new CustomCommerceContent(); break;
 
-            case CustomType.FEED:
+            case CustomType.FEED.toLowerCase():
             default: content = new CustomFeedContent(); break;
         }
 
