@@ -10,10 +10,10 @@ import { AttachmentContent } from "./chat-attachment";
 
 export enum CustomType {
 
-    FEED = 'Feed',
-    LIST = 'List',
-    COMMERCE = 'Commerce',
-    CAROUSEL = 'Carousel',
+    FEED = 'feed',
+    LIST = 'list',
+    COMMERCE = 'commerce',
+    CAROUSEL = 'carousel',
 
     
 
@@ -322,13 +322,13 @@ export abstract class CustomContent extends CustomBaseContent {
 
         switch(type.toLowerCase()) {
 
-            case CustomType.CAROUSEL.toLowerCase(): content = new CustomCarouselContent(); break;
+            case CustomType.CAROUSEL: content = new CustomCarouselContent(); break;
 
-            case CustomType.LIST.toLowerCase(): content = new CustomListContent(); break;
+            case CustomType.LIST: content = new CustomListContent(); break;
 
-            case CustomType.COMMERCE.toLowerCase(): content = new CustomCommerceContent(); break;
+            case CustomType.COMMERCE: content = new CustomCommerceContent(); break;
 
-            case CustomType.FEED.toLowerCase():
+            case CustomType.FEED:
             default: content = new CustomFeedContent(); break;
         }
 
