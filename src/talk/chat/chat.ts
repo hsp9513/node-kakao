@@ -261,7 +261,7 @@ export class TextChat extends Chat {
     }
 
     protected readAttachment(attachmentJson: any, attachmentList: ChatAttachment[]) {
-        if (attachmentJson['path'] && attachmentJson['k'] && attachmentJson['s']) { // :(
+        if (attachmentJson['path'] && attachmentJson['k'] && attachmentJson['s']) {
             attachmentList.push(new LongTextAttachment(attachmentJson['path'], attachmentJson['k'], attachmentJson['s']));
         }
     }
