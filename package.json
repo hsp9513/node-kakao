@@ -17,6 +17,9 @@
     "url": "https://pancake.sh"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "devDependencies": {
     "@types/bson": "^4.0.0",
     "@types/chai": "^4.2.3",
