@@ -75,6 +75,8 @@ export * from './talk/channel/channel-settings';
 
 export * from './talk/channel/channel-manager';
 
+export * from './talk/managed/managed-chat-channel';
+
 export * from './talk/open/open-link-type';
 export * from './talk/open/open-link-manager';
 export * from './talk/open/open-link-profile-template';
