@@ -84,7 +84,7 @@ export abstract class Chat {
     }
 
     get Text() {
-        return this.text;
+        return this.text ?? '';
     }
     
     get SendTime() {
