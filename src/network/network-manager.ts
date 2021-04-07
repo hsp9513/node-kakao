@@ -47,11 +47,11 @@ export class NetworkManager implements LocoListener, LocoInterface {
     }
 
     get Connected(): boolean {
-        return this.mainInterface && this.mainInterface.Connected || false;
+        return this.mainInterface?.Connected ?? false;
     }
 
     get Logon() {
-        return this.mainInterface && this.mainInterface.Logon || false;
+        return this.mainInterface?.Logon ?? false;
     }
 
     get Handler() {
@@ -63,15 +63,15 @@ export class NetworkManager implements LocoListener, LocoInterface {
     }
 
     async connect(): Promise<boolean> {
-        return this.mainInterface && this.mainInterface.connect() || false;
+        return this.mainInterface?.connect() ?? false;
     }
 
     disconnect(): boolean {
-        return this.mainInterface && this.mainInterface.disconnect() || false;
+        return this.mainInterface?.disconnect() ?? false;
     }
 
     async sendPacket(packet: LocoRequestPacket): Promise<boolean> {
-        return this.mainInterface && await this.mainInterface.sendPacket(packet) || false;
+        return await this.mainInterface?.sendPacket(packet) ?? false;
     }
 
     async requestPacketRes<T extends LocoResponsePacket>(packet: LocoRequestPacket): Promise<T> {

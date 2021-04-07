@@ -493,7 +493,7 @@ export class ManagedOpenChatChannel extends ManagedChatChannel implements OpenCh
     }
 
     getUserInfoId(id: Long): OpenChatUserInfo | null {
-        if (this.clientUserInfo && this.clientUserInfo.Id.equals(id)) return this.clientUserInfo;
+        if (this.clientUserInfo?.Id.equals(id)) return this.clientUserInfo;
 
         return super.getUserInfoId(id) as OpenChatUserInfo | null;
     }
@@ -511,7 +511,7 @@ export class ManagedOpenChatChannel extends ManagedChatChannel implements OpenCh
     }
 
     getManagedUserInfoId(id: Long): ManagedOpenChatUserInfo | null {
-        if (this.clientUserInfo && this.clientUserInfo.Id.equals(id)) return this.clientUserInfo as ManagedOpenChatUserInfo;
+        if (this.clientUserInfo?.Id.equals(id)) return this.clientUserInfo as ManagedOpenChatUserInfo;
         
         return this.getUserInfoIdMap(id) as ManagedOpenChatUserInfo || null;
     }

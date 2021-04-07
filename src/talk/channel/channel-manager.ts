@@ -255,7 +255,7 @@ export class ChannelManager extends IdStore<ChatChannel> {
     }
 
     async sendChatOn(channel: ChatChannel): Promise<RequestResult<boolean>> {
-        let token = channel.LastChat ? channel.LastChat.LogId : Long.ZERO;
+        let token = channel.LastChat?.LogId ?? Long.ZERO;
         let openToken;
         if (channel.isOpenChat()) openToken = (channel as OpenChatChannel).OpenToken;
 
@@ -323,7 +323,7 @@ export class ChannelManager extends IdStore<ChatChannel> {
     async requestChannelMetaList(channel: ChatChannel): Promise<RequestResult<ChannelMetaStruct[]>> {
         let res = await this.client.NetworkManager.requestPacketRes<PacketGetMetaListRes>(new PacketGetMetaListReq([ channel.Id ]));
 
-        return { status: res.StatusCode, result: res.MetaSetList[0] && res.MetaSetList[0].metaList || null };
+        return { status: res.StatusCode, result: res.MetaSetList[0]?.metaList ?? null };
     }
 
     async updateChannelMeta(channel: ChatChannel, type: ChannelMetaType, content: string): Promise<RequestResult<boolean>> {

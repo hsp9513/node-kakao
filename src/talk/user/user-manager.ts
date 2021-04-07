@@ -31,7 +31,7 @@ export class UserManager extends IdInstanceStore<ChatUser> {
     }
 
     get(key: Long): ChatUser {
-        if (this.client.ClientUser && this.client.ClientUser.Id.equals(key)) return this.client.ClientUser;
+        if (this.client.ClientUser?.Id.equals(key)) return this.client.ClientUser;
 
         return super.get(key)!;
     }

@@ -11,7 +11,7 @@ const LosslessJSON = require('lossless-json');
 export namespace JsonUtil {
 
     export function readLong(value: any): Long {
-        if (value && value.unsigned !== undefined) {
+        if (value?.unsigned !== undefined) {
             return (value as Long);
         }
 
@@ -27,7 +27,7 @@ export namespace JsonUtil {
     }
 
     function bsonLongRiviver(key: string, value: any) {
-        if (value && value.isLosslessNumber) {
+        if (value?value.isLosslessNumber) {
             try {
                 return value.valueOf();
             } catch (e) {

@@ -280,19 +280,19 @@ export namespace LocoPacketList {
     }
 
     export function hasReqPacket(name: string): boolean {
-        return requestPacketMap && requestPacketMap.has(name);
+        return requestPacketMap?.has(name);
     }
 
     export function hasResPacket(name: string): boolean {
-        return responsePacketMap && responsePacketMap.has(name);
+        return responsePacketMap?.has(name);
     }
 
     export function hasReqBodyType(type: number): boolean {
-        return defaultBodyReqPacketMap && defaultBodyReqPacketMap.has(type);
+        return defaultBodyReqPacketMap?.has(type);
     }
 
     export function hasResBodyType(type: number): boolean {
-        return defaultBodyResPacketMap && defaultBodyResPacketMap.has(type);
+        return defaultBodyResPacketMap?.has(type);
     }
 
     export function getReqPacketByName(name: string): LocoRequestPacket {
