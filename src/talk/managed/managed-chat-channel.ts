@@ -139,23 +139,13 @@ export class ManagedChatChannel extends EventEmitter implements ChatChannel {
     }
 
     getDisplayName(): string {
-        let name = this.clientName || this.Name;
-
-        if (!name) {
-            let size = Math.min(5, this.displayUserInfoList.length);
-            name = this.displayUserInfoList.slice(0, size).map(info => info.Nickname).join(', ');
-
-            if (size > this.displayUserInfoList.length) name += ', ...';
-        }
-
-        return name;
+        return this.clientName || this.Name || this.displayUserInfoList.slice(0, 5).map(info => info.Nickname).join(', ');
     }
 
     getDisplayProfileList(): string[] {
         if (this.clientRoomImageURL) return [ this.clientRoomImageURL ];
 
-        let size = Math.min(4, this.displayUserInfoList.length);
-        return this.displayUserInfoList.slice(0, size).map(info => info.ProfileImageURL);
+        return this.displayUserInfoList.slice(0, 4).map(info => info.ProfileImageURL);
     }
 
     getUserInfoList() {
