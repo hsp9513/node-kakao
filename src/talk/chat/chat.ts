@@ -402,7 +402,7 @@ export class FileChat extends Chat {
         return ChatType.File;
     }
 
-    get Map(): FileAttachment {
+    get File(): FileAttachment {
         return this.AttachmentList[0] as FileAttachment;
     }
 
