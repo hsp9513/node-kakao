@@ -403,7 +403,7 @@ export class FileChat extends Chat {
     }
 
     get File(): FileAttachment {
-        return this.AttachmentList[0] as FileAttachment;
+        return this.AttachmentList[0] as FileAttachment || null;
     }
 
     protected readAttachment(attachmentJson: any, attachmentList: ChatAttachment[]) {
