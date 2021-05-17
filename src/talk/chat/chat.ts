@@ -365,7 +365,7 @@ export class AnimatedEmoticonChat extends EmoticonChat {
 export class GifEmoticonChat extends EmoticonChat {
     
     get Type() {
-        return ChatType.StickerAni;
+        return ChatType.StickerGif;
     }
 
     protected readAttachment(attachmentJson: any, attachmentList: ChatAttachment[]) {
