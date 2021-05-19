@@ -85,10 +85,10 @@ export class TextDescFragment extends CustomFragment {
 export class URLFragment extends CustomFragment {
 
     constructor(
-        public LinkWin: string = '',
-        public LinkMacOS: string = LinkWin,
+        public LinkPC: string = '',
+        public LinkMobile: string = LinkPC,
         
-        public LinkAndroid: string = LinkWin,
+        public LinkAndroid: string = LinkMobile,
         public LinkIos: string = LinkAndroid
 
     ) {
@@ -96,8 +96,8 @@ export class URLFragment extends CustomFragment {
     }
 
     readRawContent(rawData: any): void {
-        if (rawData['LPC']) this.LinkWin = rawData['LPC'];
-        if (rawData['LMO']) this.LinkMacOS = rawData['LMO'];
+        if (rawData['LPC']) this.LinkPC = rawData['LPC'];
+        if (rawData['LMO']) this.LinkMobile = rawData['LMO'];
 
         if (rawData['LCA']) this.LinkAndroid = rawData['LCA'];
         if (rawData['LCI']) this.LinkIos = rawData['LCI'];
@@ -106,8 +106,8 @@ export class URLFragment extends CustomFragment {
     toRawContent() {
         let obj: any = {};
 
-        if (this.LinkWin !== '') obj['LPC'] = this.LinkWin;
-        if (this.LinkMacOS !== '') obj['LMO'] = this.LinkMacOS;
+        if (this.LinkPC !== '') obj['LPC'] = this.LinkPC;
+        if (this.LinkMobile !== '') obj['LMO'] = this.LinkMobile;
 
         if (this.LinkAndroid !== '') obj['LCA'] = this.LinkAndroid;
         if (this.LinkIos !== '') obj['LCI'] = this.LinkIos;
