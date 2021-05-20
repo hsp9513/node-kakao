@@ -27,7 +27,7 @@ export namespace JsonUtil {
     }
 
     function bsonLongRiviver(key: string, value: any) {
-        if (value?value.isLosslessNumber) {
+        if (value?.isLosslessNumber) {
             try {
                 return value.valueOf();
             } catch (e) {
