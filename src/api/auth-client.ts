@@ -229,7 +229,7 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
         return hash.digest('hex');
     }
 	
-	generateAutoLoginToken(): string {
+    generateAutoLoginToken(): string {
         let accessData = this.getLatestAccessData();
         let config = this.ConfigProvider.Configuration;
 	    let source = `${config.loginTokenSeedList[0]}|${accessData.autoLoginEmail}|${accessData.refreshToken}|${this.deviceUUID}|${config.loginTokenSeedList[1]}`;
@@ -237,7 +237,7 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
         let hash = crypto.createHash('sha512');
         hash.update(source);
         return hash.digest('hex');
-	}
+    }
 
     logout() {
         this.currentLogin = null;
