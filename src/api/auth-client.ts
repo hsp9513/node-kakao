@@ -13,6 +13,7 @@ import { LessSettingsStruct, MoreSettingsStruct } from "../talk/struct/api/accou
 import { LoginTokenStruct } from "../talk/struct/api/account/login-token-struct";
 import { AuthApiStruct } from "../talk/struct/auth/auth-api-struct";
 import { LoginAccessDataStruct } from "../talk/struct/auth/login-access-data-struct";
+import { RefreshTokenDataStruct } from "../talk/struct/auth/refresh-token-data-struct";
 import { WebApiStatusCode } from "../talk/struct/web-api-struct";
 import { AHeaderDecorator } from "./api-header-decorator";
 import { RequestHeader, WebApiClient } from "./web-api-client";
@@ -36,6 +37,16 @@ export type LoginForm = {
     auto_login?: boolean,
 
     passcode?: string;
+
+}
+
+export type RefreshForm = {
+
+    grant_type: string,
+
+    access_token: string,
+
+    refresh_token: string
 
 }
 
@@ -83,7 +94,7 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
         super.fillHeader(header);
 
         this.aHeader.fillHeader(header);
-        
+
         if (this.accessData) this.fillSessionHeader(header);
     }
 
@@ -140,8 +151,8 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
             'device_name': this.name
         };
 
-        if (typeof(permanent) === 'boolean') form['permanent'] = permanent;
-        if (typeof(forced) === 'boolean') form['forced'] = forced;
+        if (typeof (permanent) === 'boolean') form['permanent'] = permanent;
+        if (typeof (forced) === 'boolean') form['forced'] = forced;
 
         return form;
     }
@@ -205,6 +216,25 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
         return this.request('POST', AuthClient.getAccountApiPath(this.Agent, 'register_device.json'), form, { 'X-VC': xvc });
     }
 
+    async renew(): Promise<AuthApiStruct> {
+        if (!this.accessData) throw new Error('Not logon');
+
+        let form: RefreshForm = {
+            'grant_type': 'refresh_token',
+            'access_token': this.accessData.accessToken,
+            'refresh_token': this.accessData.refreshToken
+        }
+
+        let res = await this.requestMapped<RefreshTokenDataStruct>('POST', AuthClient.getAccountApiPath(this.Agent, 'oauth2_token.json'), RefreshTokenDataStruct.MAPPER, form);
+        if (res.status !== WebApiStatusCode.SUCCESS) {
+            throw res as LoginError;
+        }
+
+        this.accessData.accessToken = res.accessToken;
+        this.accessData.refreshToken = res.refreshToken;
+        return res;
+    }
+
     async relogin() {
         if (!this.currentLogin) throw new Error('Login data does not exist');
 
@@ -228,11 +258,11 @@ export class AuthClient extends WebApiClient implements AccessDataProvider {
         hash.update(source);
         return hash.digest('hex');
     }
-	
+
     generateAutoLoginToken(): string {
         let accessData = this.getLatestAccessData();
         let config = this.ConfigProvider.Configuration;
-	    let source = `${config.loginTokenSeedList[0]}|${accessData.autoLoginEmail}|${accessData.refreshToken}|${this.deviceUUID}|${config.loginTokenSeedList[1]}`;
+        let source = `${config.loginTokenSeedList[0]}|${accessData.autoLoginEmail}|${accessData.refreshToken}|${this.deviceUUID}|${config.loginTokenSeedList[1]}`;
 
         let hash = crypto.createHash('sha512');
         hash.update(source);
