@@ -61,9 +61,7 @@ export class ChannelManager extends IdStore<ChatChannel> {
         let channels = this.values();
 
         for(let channel of channels) {
-            if (!channel.isOpenChat()) break;
-
-            if (linkId.equals((channel as OpenChatChannel).LinkId)) return channel as OpenChatChannel;
+            if (channel.isOpenChat() && linkId.equals((channel as OpenChatChannel).LinkId)) return channel as OpenChatChannel;
         }
 
         return null;
